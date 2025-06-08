@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option csharp_namespace = "CrypticPushNotificationService";
+
+package push;
+
+// Service for sending push notifications via Firebase Cloud Messaging.
+service PushNotification {
+  // Sends a push notification to a specific device token.
+  rpc Send (PushRequest) returns (PushReply);
+}
+
+// Information about the notification to send.
+message PushRequest {
+  string token = 1;  // FCM device token.
+  string title = 2;  // Notification title.
+  string body = 3;   // Notification body text.
+}
+
+// Result of the push notification request.
+message PushReply {
+  bool success = 1;  // Whether the notification was sent successfully.
+  string error = 2;  // Error message if the send failed.
+}
